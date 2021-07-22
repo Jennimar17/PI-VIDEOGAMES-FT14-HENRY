@@ -7,10 +7,10 @@ export default function Pagination({ cardPerPage, totalCards, paginate, currentP
         pageNumbers.push(i);
     }
     return (
-        <div className="pagpos">
+        <div>
             <ul>
                 {pageNumbers && pageNumbers.map(p => 
-                p === currentPage ? <li><button  className="current" onClick={() => paginate(p)}>{p}</button></li> : <li><button className="pag" onClick={() => paginate(p)}>{p}</button></li>)}
+                p === currentPage ? <li><button onClick={() => paginate(p)}>{p}</button></li> : <li><button onClick={() => paginate(p)}>{p}</button></li>)}
             </ul>
         </div>
     )

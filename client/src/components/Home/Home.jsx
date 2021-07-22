@@ -17,6 +17,7 @@ export default function Home() {
       <Link to="/home">
         <h1> DESDE HOME </h1>
       </Link>
+      
     </div>
   );
 }

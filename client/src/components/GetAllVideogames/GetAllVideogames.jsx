@@ -1,9 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
 import Videogames from "../VideoGames/VideoGames";
+import Filters from '../Filters/Filters'
 import { getAllVideogames, getAllGenres, orderBy } from "../../actions/index";
 
-function GetGames({ getAllGenres, orderBy, getAllVideogames }) {
+//Basically, container components are called smart components because each container 
+//component is connected to Redux and consumes the global data coming from the store.
+
+function GetAllVideogames({ getAllGenres, orderBy, getAllVideogames }) {
   const [change, setChange] = React.useState(true);
   React.useEffect(() => {
     getAllGenres();
@@ -19,11 +23,13 @@ function GetGames({ getAllGenres, orderBy, getAllVideogames }) {
     setChange(false);
   };
   const SearchVideogames = (params) => {
-    getAllVideogames(params);
-    setChange(false);
-  };
+    getAllVideogames(params)
+    setChange(false)
+}
+ 
   return (
     <div>
+      <Filters SearchVideogames={SearchVideogames} order={order} />
       <div>{change && <Videogames />}</div>
     </div>
   );
@@ -36,4 +42,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(GetGames);
+export default connect(null, mapDispatchToProps)(GetAllVideogames);

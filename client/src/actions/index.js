@@ -1,11 +1,9 @@
 import axios from 'axios'
 import {
   GET_ALL_VIDEOGAMES,
-  ADD_VIDEOGAME,
   GET_VIDEOGAME_DETAIL,
   GET_ALL_GENRES,
   ORDER_BY,
-  RESET
 } from "../utils/constants.js";
 
 export function getAllVideogames(query) {
@@ -53,10 +51,4 @@ export function orderBy(order) {
   };
 };
 
-export const resetAll = () => {
-  return (dispatch) => {
-    dispatch({
-      type: "RESET",
-    });
-  };
-};
+
