@@ -3,7 +3,7 @@ import { Route } from "react-router-dom";
 import LandingPage from "./components/landingPage/LandingPage";
 import GameDetail from "./components/GetDetail/GetDetail";
 import GetAllVideogames from "./components/GetAllVideogames/GetAllVideogames";
-import AddVideoGame from "./components/AddVideogame/AddVideogame";
+import AddVideoGame from "./components/AddVideoGame/AddVideogame";
 
 import "./App.css";
 

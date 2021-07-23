@@ -1,6 +1,7 @@
 import { React, Fragment } from "react";
 import { Link } from "react-router-dom";
 import "./Card.css";
+import not_found from "../../assets/img/not_found.png";
 import { FaRegEye } from "react-icons/fa";
 
 export default function Videogame(data) {
@@ -14,13 +15,14 @@ export default function Videogame(data) {
               if (i < 3) {
                 return <span className="card-genres__style"> {g.name} </span>;
               }
+              return null; //no hay otra vuelta, para q no regrese nada
             })}
           <p className="card-rating">{data.rating}</p>
         </div>
         {data.image ? (
-          <img src={`${data.image}`} alt="Videogame" className="img-style" />
+          <img src={`${data.image}`} alt="Videogames" className="img-style" />
         ) : (
-          "IMAGE NOT FOUND"
+          <img src={not_found} alt="not found" className="img-style"></img>
         )}
         <div className="button-container">
           {data.id && (

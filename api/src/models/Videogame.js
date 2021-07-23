@@ -26,7 +26,6 @@ module.exports = (sequelize) => {
       type: DataTypes.ARRAY(
         DataTypes.JSON({ type: DataTypes.JSON(DataTypes.STRING) })
       ),
-      
     },
     released: {
       type: DataTypes.STRING,

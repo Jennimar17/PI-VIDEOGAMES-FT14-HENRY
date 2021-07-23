@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from "axios";
 import {
   GET_ALL_VIDEOGAMES,
   GET_VIDEOGAME_DETAIL,
@@ -12,7 +12,7 @@ export function getAllVideogames(query) {
       dispatch({ type: GET_ALL_VIDEOGAMES, payload: response.data });
     });
   };
-};
+}
 
 export function addVideogame(payload) {
   let post = {
@@ -27,7 +27,7 @@ export function addVideogame(payload) {
   return function () {
     axios.post("http://localhost:3001/videogame", post);
   };
-};
+}
 
 export function getVideogameDetail(id) {
   return function (dispatch) {
@@ -35,7 +35,7 @@ export function getVideogameDetail(id) {
       dispatch({ type: GET_VIDEOGAME_DETAIL, payload: response.data });
     });
   };
-};
+}
 
 export function getAllGenres() {
   return function (dispatch) {
@@ -43,12 +43,10 @@ export function getAllGenres() {
       dispatch({ type: GET_ALL_GENRES, payload: response.data });
     });
   };
-};
+}
 
 export function orderBy(order) {
   return function (dispatch) {
     dispatch({ type: ORDER_BY, payload: order });
   };
-};
-
-
+}

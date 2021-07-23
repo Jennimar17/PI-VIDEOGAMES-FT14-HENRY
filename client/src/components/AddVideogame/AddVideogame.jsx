@@ -1,8 +1,8 @@
-import axios from "axios";
 import React from "react";
 import { connect } from "react-redux";
 import { addVideogame } from "../../actions/index";
 import { useHistory } from "react-router-dom";
+import "./AddVideogame.css";
 
 function AddVideoGame({ addVideogame, genres }) {
   const [input, setInput] = React.useState({
@@ -12,7 +12,6 @@ function AddVideoGame({ addVideogame, genres }) {
     rating: "0",
     platforms: [],
     genres: [],
-    image: "",
   });
 
   const history = useHistory();
@@ -24,32 +23,13 @@ function AddVideoGame({ addVideogame, genres }) {
     });
   };
 
-  const handleInputImage = function (files) {
-    const formData = new FormData();
-    formData.append("file", files);
-    formData.append("upload_preset", "upuyvmwv");
-    axios
-      .post(
-        "https://api.cloudinary.com/v1_1/jorgeleandroolaizola/image/upload",
-        formData
-      )
-      .then((response) =>
-        setInput({
-          ...input,
-          image: response.data.secure_url,
-        })
-      );
-  };
-
   const handleSelect = function (e) {
     let select = e.target.selectedOptions;
     let selected = [];
     for (var i = 0; i < select.length; i++) {
-      console.log(select[i].value);
       selected.push(select[i].value);
     }
     selected = selected.map((genre) => parseInt(genre));
-    console.log(selected);
     setInput({
       ...input,
       genres: selected,
@@ -96,12 +76,12 @@ function AddVideoGame({ addVideogame, genres }) {
 
   return (
     <div>
-      <form className="DForm" onSubmit={handleSubmit}>
-        <div className="Data">
-          <div className="DInput">
-            <label className="Label">Name</label>
+      <form onSubmit={handleSubmit}>
+        <div className="form-container">
+          <div>
+            <label>Name</label>
             <input
-              placeholder="Set the name of your game"
+              placeholder="name"
               type="text"
               name="name"
               onChange={handleInputChange}
@@ -109,10 +89,10 @@ function AddVideoGame({ addVideogame, genres }) {
               required
             />
           </div>
-          <div className="DInput Description">
-            <label className="Label">Description</label>
+          <div>
+            <label>Description</label>
             <textarea
-              placeholder="Place a brief description of your game"
+              placeholder="description"
               type="text"
               name="description"
               onChange={handleInputChange}
@@ -120,26 +100,16 @@ function AddVideoGame({ addVideogame, genres }) {
               required
             ></textarea>
           </div>
-          <div className="DInput">
-            <label className="Label">Released on</label>
+          <div>
+            <label>Released</label>
             <input
               type="date"
               name="date"
               onChange={handleInputChange}
               value={input.date}
-              required
             ></input>
           </div>
-          <div className="DInput Image">
-            <label className="Label">Image</label>
-            <input
-              type="file"
-              name="image"
-              onChange={(event) => handleInputImage(event.target.files[0])}
-              required
-            />
-          </div>
-          <div className="DInput Rating">
+          <div>
             <label>Rating</label>
             <div>
               <input
@@ -157,23 +127,22 @@ function AddVideoGame({ addVideogame, genres }) {
               {input.rating === "5" && "x"}
             </div>
           </div>
-          <div className="DInput">
-            <label className="Label">Platforms</label>
+          <div>
+            <label>Platforms</label>
             <input
-              placeholder="Tell us which platforms are available for this game"
+              placeholder="platfiorms"
               type="text"
               name="platforms"
               onKeyDown={handlePlatforms}
             />
-            <div className="ptConteiner">
+            <div>
               {input.platforms &&
                 input.platforms.map((p) => (
-                  <span className="ptDiv">
+                  <span>
                     <span style={{ paddingRight: "10px" }}>
                       {p.platform.name.toUpperCase()}
                     </span>
                     <button
-                      className="ptBtn"
                       value={p.platform.name}
                       onClick={(e) => filterPlatform(e)}
                     >
@@ -183,35 +152,16 @@ function AddVideoGame({ addVideogame, genres }) {
                 ))}
             </div>
           </div>
-          <div className="DInput">
-            <label className="LabelGenres">Genres</label>
-            <span className="Comment">
-              *If you wanna select multiple genres, hold ctrl + click
-            </span>
-            <select multiple size="10" onChange={handleSelect} required>
+          <div>
+            <label>Genres</label>
+
+            <select multiple size="5" onChange={handleSelect} /* required */>
               {genres &&
                 genres.map((g) => <option value={g.id}>{g.name}</option>)}
             </select>
           </div>
+          <input type="submit" value="Create Game" />
         </div>
-        <div className="PWPreview">
-          {/* Preview */}
-          <label>Card preview</label>
-          <div className="PWConteiner">
-            {input.image ? (
-              <img
-                src={`${input.image}`}
-                alt="Videogame"
-                className="PWImg"
-              ></img>
-            ) : (
-              "img"
-            )}
-            <div className="PWtitle">{input.name}</div>
-            <div className="PWinfoCont"></div>
-          </div>
-        </div>
-        <input className="AVSubmit" type="submit" value="Submit game" />
       </form>
     </div>
   );
